@@ -1209,5 +1209,6 @@ def generate_schedule():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    print("UI is ready! Open http://127.0.0.1:5001/ in your browser.")
-    app.run(debug=True, use_reloader=False, port=5001)
+    # Use the dynamic PORT assigned by Render, falling back to 5001 locally
+    port = int(os.environ.get("PORT", 5001))
+    app.run(host="0.0.0.0", port=port)
